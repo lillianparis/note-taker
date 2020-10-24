@@ -55,6 +55,9 @@ app.post("/api/notes", function(req, res) {
   });
 
 
+//   Must create delete notes portion
+
+
 app.listen(PORT, function () {
     console.log("App listening on PORT, http://localhost:" + PORT);
 });
