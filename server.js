@@ -26,6 +26,19 @@ var PORT = 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.get("/notes", function(req, res) {
+    res.send("Note Taker");
+  });
+
+  app.get("*", function(req, res) {
+    res.send("Note Taker");
+  });
+
+  app.get("/api/notes", function(req, res) {
+    res.send("Note Taker");
+  });
+  
+
 app.listen(PORT, function () {
     console.log("App listening on PORT, http://localhost:" + PORT);
 });
