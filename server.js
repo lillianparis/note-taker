@@ -15,6 +15,7 @@
 //   * DELETE `/api/notes/:id` - Should receive a query parameter containing the id of a note to delete. This means you'll need to find a way to give each note a unique `id` when it's saved. In order to delete a note, you'll need to read all notes from the `db.json` file, remove the note with the given `id` property, and then rewrite the notes to the `db.json` file.
 
 var express = require("express");
+var aRoute = require("./")
 // var path = require("path");
 
 // Sets up the Express App
@@ -26,38 +27,39 @@ var PORT = 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get("/notes", function(req, res) {
-    res.send("Note Taker");
-  });
+// HTML Routes
 
-  app.get("*", function(req, res) {
-    res.send("Note Taker");
-  });
+app.get("/notes", function (req, res) {
+  res.send("Note Taker");
+});
 
-  app.get("/api/notes", function(req, res) {
-    res.send("Note Taker");
-  });
+app.get("*", function (req, res) {
+  res.send("Note Taker");
+});
+
+app.get("/api/notes", function (req, res) {
+  res.send("Note Taker");
+});
 
 
-  // Create New Characters - takes in JSON input
-app.post("/api/notes", function(req, res) {
-    // req.body hosts is equal to the JSON post sent from the user
-    // This works because of our body parsing middleware
-    var newNote = req.body;
-  
-    console.log(newNote);
-  
-    // We then add the json the user sent to the character array
-    characters.push(newNote);
-  
-    // We then display the JSON to the users
-    res.json(newNote);
-  });
+// Create New Characters - takes in JSON input
+app.post("/api/notes", function (req, res) {
+
+  var newNote = req.body;
+
+  console.log(newNote);
+
+
+  characters.push(newNote);
+
+
+  res.json(newNote);
+});
 
 
 //   Must create delete notes portion
 
 
 app.listen(PORT, function () {
-    console.log("App listening on PORT, http://localhost:" + PORT);
+  console.log("App listening on PORT, http://localhost:" + PORT);
 });
