@@ -40,7 +40,7 @@ app.get("/", function (req, res) {
 
 // Creating api route
 app.get("/api/notes", function (req, res) {
-  fs.readFile("/db/db.json", function (err, data) {
+  fs.readFile("./db/db.json", function (err, data) {
     if (err) throw (err);
     let notes = JSON.parse(data)
     return res.JSON(notes);
@@ -50,16 +50,12 @@ app.get("/api/notes", function (req, res) {
 
 // Create New Characters - takes in JSON input
 app.post("/api/notes", function (req, res) {
+let saved = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+let new = req.body;
+let id = (savedNotes.length).toString();
+new.id = id;
+saved.push(new);
 
-  var newNote = req.body;
-
-  console.log(newNote);
-
-
-  characters.push(newNote);
-
-
-  res.json(newNote);
 });
 
 
