@@ -21,7 +21,7 @@ var path = require("path");
 // Sets up the Express App
 // =============================================================
 var app = express();
-var PORT = proccess.env.PORT || 3000;
+var PORT = 3000;
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -51,10 +51,9 @@ app.get("/api/notes", function (req, res) {
 // Create New Characters - takes in JSON input
 app.post("/api/notes", function (req, res) {
 let saved = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
-let new = req.body;
+let newSaved = req.body;
 let id = (savedNotes.length).toString();
-new.id = id;
-saved.push(new)
+newSaved.id = id;
 
 });
 
