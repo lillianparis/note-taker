@@ -54,7 +54,7 @@ let saved = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
 let new = req.body;
 let id = (savedNotes.length).toString();
 new.id = id;
-saved.push(new);
+saved.push(new)
 
 });
 
