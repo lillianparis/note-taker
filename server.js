@@ -52,13 +52,14 @@ app.get("/api/notes", function (req, res) {
 app.post("/api/notes", function (req, res) {
 let saved = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
 let newSaved = req.body;
-let id = (savedNotes.length).toString();
+let id = (saved.length).toString();
 newSaved.id = id;
 
 });
 
 
 //   Must create delete notes portion
+// Deletion portion works
 
 app.delete("/api/notes/:id", function(req, res) {
   var id = req.params.id
