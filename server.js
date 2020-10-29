@@ -50,24 +50,33 @@ app.get("/api/notes", function (req, res) {
 
 // Create New Characters - takes in JSON input
 app.post("/api/notes", function (req, res) {
-let saved = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
-let newSaved = req.body;
-let id = (saved.length).toString();
-newSaved.id = id;
-
+  // Get existing notes
+  let saved = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+  // Prepare new note object
+  let newSaved = req.body;
+  let id = (saved.length).toString();
+  newSaved.id = id;
+  // console.log(newSaved);
+  // console.log(saved);
+  // Push new note to existing notes
+  saved.push(newSaved);
+  // Write all notes back to DB
+  fs.writeFileSync("./db/db.json", JSON.stringify(saved));
+  // 204 = NO CONTENT!!
+  return res.sendStatus(204);
 });
 
 
 //   Must create delete notes portion
 // Deletion portion works
 
-app.delete("/api/notes/:id", function(req, res) {
+app.delete("/api/notes/:id", function (req, res) {
   var id = req.params.id
-  fs.readFile("./db/db.json", function(err, data) {
+  fs.readFile("./db/db.json", function (err, data) {
     if (err) throw (err);
-    const input =JSON.parse(data)
+    const input = JSON.parse(data)
     const respond = input.filter(item => {
-      if(id !== item.id){
+      if (id !== item.id) {
         return item
       }
     })
