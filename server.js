@@ -60,11 +60,10 @@ app.delete("/api/notes/:id", function (req, res) {
     console.log("respond:", respond)
     // Deletes notes from DB
     fs.writeFileSync("./db/db.json", JSON.stringify(respond))
-
+    // Logic to read the json file and then display on page
+   
   })
 })
-    // Deletes notes from DB
-    // fs.writeFileAsync("./db/db.json", JSON.stringify(respond))
 
 // app.get is required from instruction
 app.get("*", function(req, res) {
