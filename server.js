@@ -56,19 +56,18 @@ app.delete("/api/notes/:id", function (req, res) {
       if (id !== item.id) {
         return item
       }
+      
     })
     console.log("respond:", respond)
     // Deletes notes from DB
-    fs.writeFileSync("./db/db.json", JSON.stringify(respond))
-    // Logic to read the json file and then display on page
-   
+      // Logic to read the json file and then display on page
+    })
   })
-})
 
-// app.get is required from instruction
-app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "/public/index.html"));
-});
-app.listen(PORT, function () {
-  console.log("App listening on PORT, http://localhost:" + PORT);
-});
+  // app.get is required from instruction
+  app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "/public/index.html"));
+  });
+  app.listen(PORT, function () {
+    console.log("App listening on PORT, http://localhost:" + PORT);
+  });
