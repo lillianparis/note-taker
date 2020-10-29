@@ -45,24 +45,25 @@ app.post("/api/notes", function (req, res) {
   return res.sendStatus(204);
 });
 
-
-//   Must create delete notes portion
-// Deletion portion works
-
+// Deletes notes
 app.delete("/api/notes/:id", function (req, res) {
   var id = req.params.id
   fs.readFile("./db/db.json", function (err, data) {
     if (err) throw (err);
-    const input = JSON.parse(data)
-    const respond = input.filter(item => {
+    const userInput = JSON.parse(data)
+    const respond = userInput.filter(item => {
       if (id !== item.id) {
         return item
       }
     })
+    // Deletes notes from DB
+    fs.writeFile(".db/db.json", JSON.stringify(respond))
   })
 })
-
-
+// app.get is required from instruction
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "/public/index.html"));
+});
 app.listen(PORT, function () {
   console.log("App listening on PORT, http://localhost:" + PORT);
 });
