@@ -51,15 +51,21 @@ app.delete("/api/notes/:id", function (req, res) {
   fs.readFile("./db/db.json", function (err, data) {
     if (err) throw (err);
     const userInput = JSON.parse(data)
+    console.log("userInput:", userInput)
     const respond = userInput.filter(item => {
       if (id !== item.id) {
         return item
       }
     })
+    console.log("respond:", respond)
     // Deletes notes from DB
-    fs.writeFile(".db/db.json", JSON.stringify(respond))
+    fs.writeFileSync("./db/db.json", JSON.stringify(respond))
+
   })
 })
+    // Deletes notes from DB
+    // fs.writeFileAsync("./db/db.json", JSON.stringify(respond))
+
 // app.get is required from instruction
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "/public/index.html"));
