@@ -17,7 +17,7 @@ app.get("/notes", function (req, res) {
   res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
 
-// Creating api route
+
 app.get("/api/notes", function (req, res) {
   fs.readFile("./db/db.json", function (err, data) {
     if (err) throw (err);
@@ -48,6 +48,7 @@ app.post("/api/notes", function (req, res) {
 // Deletes notes
 app.delete("/api/notes/:id", function (req, res) {
   var id = req.params.id
+  console.log(id);
   fs.readFile("./db/db.json", function (err, data) {
     if (err) throw (err);
     const userInput = JSON.parse(data)
@@ -58,7 +59,11 @@ app.delete("/api/notes/:id", function (req, res) {
       }
       
     })
-    console.log("respond:", respond)
+    console.log("respond:", respond);
+
+    fs.writeFileSync("./db/db.json", JSON.stringify(respond));
+
+    return res.sendStatus(204);
     // Deletes notes from DB
       // Logic to read the json file and then display on page
     })
